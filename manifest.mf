@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+OpenIDE-Module: de.uni_leipzig.informatik.asv.gephi.chinesewhispers/0
+OpenIDE-Module-Localizing-Bundle: de/uni_leipzig/informatik/asv/gephi/chinesewhispers/Bundle.properties
+OpenIDE-Module-Specification-Version: 0.3
+
