@@ -4,8 +4,8 @@ import java.util.*;
 import org.gephi.clustering.api.Cluster;
 import org.gephi.clustering.spi.Clusterer;
 import org.gephi.graph.api.Edge;
+import org.gephi.graph.api.Graph;
 import org.gephi.graph.api.GraphModel;
-import org.gephi.graph.api.HierarchicalUndirectedGraph;
 import org.gephi.graph.api.Node;
 import org.gephi.utils.longtask.spi.LongTask;
 import org.gephi.utils.progress.ProgressTicket;
@@ -51,12 +51,14 @@ public class ChineseWhispersClusterer implements Clusterer, LongTask {
         cancelled = false;
         progress.start(2*iterations+2);           
         progress.progress("Clustering setup");
-        result = new ArrayList<Cluster>();      
+        result = new ArrayList<Cluster>();
+
+        Graph graph = gm.getHierarchicalUndirectedGraph();
+        graph.readLock();
         
-        HierarchicalUndirectedGraph graph = gm.getHierarchicalUndirectedGraph();
         Map<Node,Integer> classes = new HashMap<Node, Integer>();
         
-        progress.progress("Filterung of unconnected Nodes");
+        progress.progress("Filtering unconnected Nodes");
         int counter = 0;
         List<Node> connectedNodes = new ArrayList<Node>();
         for (Node node : graph.getNodes()) {
@@ -90,7 +92,10 @@ public class ChineseWhispersClusterer implements Clusterer, LongTask {
             
             Map<Node,Integer> classesBuffer = new HashMap<Node, Integer>(classes);
             for (Node node : inputNodes) {
-                if (cancelled) return;
+                if (cancelled) {
+                    graph.readUnlockAll();
+                    return;
+                }
                 
                 Map<Integer,Double> rankedClasses = new HashMap<Integer, Double>();
                 
@@ -131,9 +136,11 @@ public class ChineseWhispersClusterer implements Clusterer, LongTask {
                 }
             }
             if (stepwiseUpdate) classes = classesBuffer;
-            if (cancelled) return;            
+            if (cancelled) {
+                graph.readUnlockAll();
+                return;
+            }            
         }
-        if (cancelled) return;
         
         Map<Integer,ChineseWhispersClusterImpl> classCluster = new HashMap<Integer, ChineseWhispersClusterImpl>();
         for (Map.Entry<Node,Integer> entry : classes.entrySet()) {
@@ -145,11 +152,18 @@ public class ChineseWhispersClusterer implements Clusterer, LongTask {
             }
             classCluster.get(classValue).addNode(entry.getKey());     
         }
-        
-        if (cancelled) return;
+
+        if (cancelled) {
+            graph.readUnlockAll();
+            return;
+        }
         progress.progress();
         
         result.addAll(classCluster.values());
+        
+        graph.readUnlockAll();
+        
+        graph.writeLock();
         
         long longer=189635271;
         if (randomColoring) for (Cluster c : result) {
@@ -161,6 +175,8 @@ public class ChineseWhispersClusterer implements Clusterer, LongTask {
                 n.getNodeData().setColor(r,g,b);
             }
         }
+        
+        graph.writeUnlock();
         
         progress.finish("Finished");
     }
@@ -181,5 +197,6 @@ public class ChineseWhispersClusterer implements Clusterer, LongTask {
     public void setProgressTicket(ProgressTicket progress) {
        this.progress = progress;
     }
-    
+
+
 }
