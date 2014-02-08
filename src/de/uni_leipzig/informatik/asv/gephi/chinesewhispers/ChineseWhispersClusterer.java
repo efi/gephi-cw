@@ -9,6 +9,7 @@ import org.gephi.graph.api.GraphModel;
 import org.gephi.graph.api.Node;
 import org.gephi.utils.longtask.spi.LongTask;
 import org.gephi.utils.progress.ProgressTicket;
+import org.openide.util.NbBundle;
 
 public class ChineseWhispersClusterer implements Clusterer, LongTask {
 
@@ -22,7 +23,12 @@ public class ChineseWhispersClusterer implements Clusterer, LongTask {
     public boolean getRandomColoring() { return randomColoring; }
     public void setRandomColoring(boolean randomColoring) { this.randomColoring = randomColoring; }
     
-    public enum Propagation { TOP, DIST, DIST_LOG, VOTE }
+    public enum Propagation { TOP, DIST, DIST_LOG, VOTE;
+    @Override
+        public String toString() {
+            return NbBundle.getMessage(ChineseWhispersClusterer.class, "ChineseWhispersClusterer.propagation." + this.name());
+        }
+    }
     private Propagation propagation = Propagation.TOP;
     public Propagation getPropagation() { return propagation; }
     public void setPropagation( Propagation propagation ) { this.propagation = propagation; }
