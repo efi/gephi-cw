@@ -78,6 +78,14 @@ public class ChineseWhispersPanel extends javax.swing.JPanel {
         jFormattedTextFieldMinimumEdgeWeight.setValue(minimumEdgeWeight);
     }
     
+    public boolean getUseVisibleGraph() {
+        return (jComboBoxClusterSource.getSelectedIndex()==1);
+    }
+    
+    public void setUseVisibleGraph(boolean useVisibleGraph) {
+        jComboBoxClusterSource.setSelectedIndex(useVisibleGraph ? 1 : 0);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -95,6 +103,8 @@ public class ChineseWhispersPanel extends javax.swing.JPanel {
         jCheckBoxDoColoring = new javax.swing.JCheckBox();
         jLabel7 = new javax.swing.JLabel();
         jCheckBoxRandomNodeOrder = new javax.swing.JCheckBox();
+        jLabel8 = new javax.swing.JLabel();
+        jComboBoxClusterSource = new javax.swing.JComboBox();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jComboBoxPropagationType = new javax.swing.JComboBox();
@@ -122,6 +132,15 @@ public class ChineseWhispersPanel extends javax.swing.JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(jCheckBoxRandomNodeOrder, org.openide.util.NbBundle.getMessage(ChineseWhispersPanel.class, "ChineseWhispersPanel.jCheckBoxRandomNodeOrder.text")); // NOI18N
 
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel8, org.openide.util.NbBundle.getMessage(ChineseWhispersPanel.class, "ChineseWhispersPanel.jLabel8.text")); // NOI18N
+
+        jComboBoxClusterSource.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Complete graph", "Visible graph" }));
+        jComboBoxClusterSource.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxClusterSourceActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -139,16 +158,23 @@ public class ChineseWhispersPanel extends javax.swing.JPanel {
                             .addComponent(jLabel1))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addComponent(jSpinnerIterations, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(37, 37, 37)
-                                .addComponent(jCheckBoxDoColoring)))))
+                                .addComponent(jCheckBoxDoColoring))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboBoxClusterSource, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jSpinnerIterations, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addComponent(jLabel8))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jComboBoxClusterSource, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jSpinnerIterations, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -160,7 +186,7 @@ public class ChineseWhispersPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jCheckBoxRandomNodeOrder))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(ChineseWhispersPanel.class, "ChineseWhispersPanel.jPanel2.border.title"))); // NOI18N
@@ -213,10 +239,9 @@ public class ChineseWhispersPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jFormattedTextFieldMinimumEdgeWeight)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jCheckBoxStepwiseUpdates)
-                        .addComponent(jComboBoxPropagationType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jSpinnerPropagationVoteValue)))
+                    .addComponent(jCheckBoxStepwiseUpdates)
+                    .addComponent(jComboBoxPropagationType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSpinnerPropagationVoteValue))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -252,9 +277,10 @@ public class ChineseWhispersPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(header, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -272,11 +298,16 @@ public class ChineseWhispersPanel extends javax.swing.JPanel {
         jLabel3.setEnabled(enable);
     }//GEN-LAST:event_jComboBoxPropagationTypeActionPerformed
 
+    private void jComboBoxClusterSourceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxClusterSourceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxClusterSourceActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.jdesktop.swingx.JXHeader header;
     private javax.swing.JCheckBox jCheckBoxDoColoring;
     private javax.swing.JCheckBox jCheckBoxRandomNodeOrder;
     private javax.swing.JCheckBox jCheckBoxStepwiseUpdates;
+    private javax.swing.JComboBox jComboBoxClusterSource;
     private javax.swing.JComboBox jComboBoxPropagationType;
     private javax.swing.JFormattedTextField jFormattedTextFieldMinimumEdgeWeight;
     private javax.swing.JLabel jLabel1;
@@ -286,6 +317,7 @@ public class ChineseWhispersPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSpinner jSpinnerIterations;

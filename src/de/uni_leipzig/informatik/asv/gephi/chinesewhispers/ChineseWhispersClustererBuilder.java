@@ -5,10 +5,15 @@ import org.openide.util.lookup.ServiceProvider;
 
 @ServiceProvider(service = ClustererBuilder.class)
 public class ChineseWhispersClustererBuilder<T> implements ClustererBuilder {
+    
+    Clusterer clusterer = null;
 
     @Override
     public Clusterer getClusterer() {
-        return new ChineseWhispersClusterer();
+        if (clusterer==null) {
+            clusterer = new ChineseWhispersClusterer();
+        }
+        return clusterer;
     }
 
     @Override

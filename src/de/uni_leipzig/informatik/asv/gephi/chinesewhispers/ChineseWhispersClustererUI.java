@@ -20,6 +20,7 @@ public class ChineseWhispersClustererUI implements ClustererUI {
     public void setup(Clusterer clust) {
         clusterer = (ChineseWhispersClusterer)clust;
         if (panel != null) {
+            panel.setUseVisibleGraph(clusterer.getUseVisibleGraph());
             panel.setIterations(clusterer.getIterations());
             panel.setDoColoring(clusterer.getRandomColoring());
             panel.setRandomNodeOrder(clusterer.getRandomizedNodeOrder());
@@ -33,6 +34,7 @@ public class ChineseWhispersClustererUI implements ClustererUI {
     @Override
     public void unsetup() {
         if (panel != null) {
+            clusterer.setUseVisibleGraph(panel.getUseVisibleGraph());
             clusterer.setIterations(panel.getIterations());
             clusterer.setRandomColoring(panel.getDoColoring());
             clusterer.setRandomizedNodeOrder(panel.getRandomNodeOrder());

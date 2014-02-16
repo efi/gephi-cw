@@ -14,6 +14,10 @@ import org.openide.util.NbBundle;
 public class ChineseWhispersClusterer implements Clusterer, LongTask {
 
     private List<Cluster> result = new ArrayList<Cluster>();
+    
+    private boolean useVisibleGraph;
+    public boolean getUseVisibleGraph() { return useVisibleGraph; }
+    public void setUseVisibleGraph(boolean useVisibleGraph) { this.useVisibleGraph = useVisibleGraph; }
  
     private int iterations = 10;
     public int getIterations() { return iterations; }
@@ -59,7 +63,14 @@ public class ChineseWhispersClusterer implements Clusterer, LongTask {
         progress.progress("Clustering setup");
         result = new ArrayList<Cluster>();
 
-        Graph graph = gm.getHierarchicalUndirectedGraph();
+        Graph graph ;
+        
+        if (useVisibleGraph) {
+            graph = gm.getHierarchicalUndirectedGraphVisible();
+        } else {
+            graph = gm.getHierarchicalUndirectedGraph();
+        }
+
         graph.readLock();
         
         Map<Node,Integer> classes = new HashMap<Node, Integer>();
@@ -108,7 +119,7 @@ public class ChineseWhispersClusterer implements Clusterer, LongTask {
                 for (Edge edge : graph.getEdges(node)) {
                     if (edge.getWeight()<minimumEdgeWeight) continue;
                     int neighbourClass;
-                    Node otherNode = edge.getSource()==node ? edge.getTarget() : edge.getSource();
+                    Node otherNode = graph.getOpposite(node, edge);
                     neighbourClass = classes.get(otherNode);
                     double impact=0;
                     switch (propagation) {
