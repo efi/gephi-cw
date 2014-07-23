@@ -53,6 +53,16 @@ public class ChineseWhispersClusterer implements Clusterer, LongTask {
     public boolean getRandomizedNodeOrder() { return randomizedNodeOrder; }
     public void setRandomizedNodeOrder(boolean randomizedNodeOrder) { this.randomizedNodeOrder = randomizedNodeOrder; }
     
+    public enum Unconnected { IGNORE, COMBINE, INDIVIDUAL;
+    @Override
+        public String toString() {
+            return NbBundle.getMessage(ChineseWhispersClusterer.class, "ChineseWhispersClusterer.unconnected." + this.name());
+        }
+    }
+    private Unconnected unconnected = Unconnected.IGNORE;
+    public Unconnected getUnconnected() { return unconnected; }
+    public void setUnconnected( Unconnected unconnected ) { this.unconnected = unconnected; }
+    
     ProgressTicket progress = null;
     boolean cancelled = false;
     
@@ -76,13 +86,15 @@ public class ChineseWhispersClusterer implements Clusterer, LongTask {
         Map<Node,Integer> classes = new HashMap<Node, Integer>();
         
         progress.progress("Filtering unconnected Nodes");
-        int counter = 0;
+        int counter = 1;
         List<Node> connectedNodes = new ArrayList<Node>();
         for (Node node : graph.getNodes()) {
+          if (unconnected == Unconnected.INDIVIDUAL) classes.put(node, counter++);
           if (graph.getNeighbors(node).iterator().hasNext()) {
               connectedNodes.add(node);
-              classes.put(node, counter++);
+              if (unconnected != Unconnected.INDIVIDUAL) classes.put(node, counter++);
           }
+          else if (unconnected == Unconnected.COMBINE) classes.put(node, 0);
         }
         progress.progress("Initializing clustering iterations");
         progress.progress();

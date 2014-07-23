@@ -28,6 +28,7 @@ public class ChineseWhispersClustererUI implements ClustererUI {
             panel.setPropagationVoteValue((float)clusterer.getPropagationVoteValue());
             panel.setStepwiseUpdates(clusterer.getStepwiseUpdate());
             panel.setMiniumEdgeWeight((float) clusterer.getMinimumEdgeWeight());
+            panel.setUnconnected(clusterer.getUnconnected());
         }
     }
 
@@ -42,6 +43,7 @@ public class ChineseWhispersClustererUI implements ClustererUI {
             clusterer.setPropagationVoteValue(panel.getPropagationVoteValue());
             clusterer.setStepwiseUpdate(panel.getStepwiseUpdates());
             clusterer.setMinimumEdgeWeight(panel.getMinimumEdgeWeight());
+            clusterer.setUnconnected(panel.getUnconnected());
         }
     }
     

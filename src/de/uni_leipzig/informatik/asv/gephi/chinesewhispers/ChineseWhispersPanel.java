@@ -50,7 +50,7 @@ public class ChineseWhispersPanel extends javax.swing.JPanel {
     public void setPropagation(ChineseWhispersClusterer.Propagation item) {
         jComboBoxPropagationType.setSelectedItem(item);
         boolean enabled = item.equals(Propagation.VOTE);
-        jLabel3.setEnabled(enabled);
+        jLabelPropagationVoteValue.setEnabled(enabled);
         jSpinnerPropagationVoteValue.setEnabled(enabled);
     }
 
@@ -86,6 +86,14 @@ public class ChineseWhispersPanel extends javax.swing.JPanel {
         jComboBoxClusterSource.setSelectedIndex(useVisibleGraph ? 1 : 0);
     }
     
+    public ChineseWhispersClusterer.Unconnected getUnconnected() {
+        return (ChineseWhispersClusterer.Unconnected) jComboBoxUnconnected.getSelectedItem();
+    }
+    
+    public void setUnconnected(ChineseWhispersClusterer.Unconnected item) {
+        jComboBoxUnconnected.setSelectedItem(item);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -96,43 +104,48 @@ public class ChineseWhispersPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         header = new org.jdesktop.swingx.JXHeader();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jPanelGeneral = new javax.swing.JPanel();
+        jLabelIterations = new javax.swing.JLabel();
         jSpinnerIterations = new javax.swing.JSpinner();
-        jLabel4 = new javax.swing.JLabel();
+        jLabelDoColoring = new javax.swing.JLabel();
         jCheckBoxDoColoring = new javax.swing.JCheckBox();
-        jLabel7 = new javax.swing.JLabel();
+        jLabelRandomNodeOrder = new javax.swing.JLabel();
         jCheckBoxRandomNodeOrder = new javax.swing.JCheckBox();
-        jLabel8 = new javax.swing.JLabel();
+        jLabelClusterSource = new javax.swing.JLabel();
         jComboBoxClusterSource = new javax.swing.JComboBox();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelClusterUnconnected = new javax.swing.JLabel();
+        jComboBoxUnconnected = new javax.swing.JComboBox();
+        jPanelClassPropagation = new javax.swing.JPanel();
+        jLabelPropagationType = new javax.swing.JLabel();
         jComboBoxPropagationType = new javax.swing.JComboBox();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelPropagationVoteValue = new javax.swing.JLabel();
         jSpinnerPropagationVoteValue = new javax.swing.JSpinner();
         jCheckBoxStepwiseUpdates = new javax.swing.JCheckBox();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        jLabelStepwiseUpdates = new javax.swing.JLabel();
+        jLabelMinimumEdgeWeight = new javax.swing.JLabel();
         jFormattedTextFieldMinimumEdgeWeight = new javax.swing.JFormattedTextField();
 
         header.setDescription(org.openide.util.NbBundle.getMessage(ChineseWhispersPanel.class, "ChineseWhispersPanel.header.description")); // NOI18N
+        header.setDoubleBuffered(false);
         header.setTitle(org.openide.util.NbBundle.getMessage(ChineseWhispersPanel.class, "ChineseWhispersPanel.header.title")); // NOI18N
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(ChineseWhispersPanel.class, "ChineseWhispersPanel.jPanel1.border.title"))); // NOI18N
+        jPanelGeneral.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(ChineseWhispersPanel.class, "ChineseWhispersPanel.jPanelGeneral.border.title"))); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(ChineseWhispersPanel.class, "ChineseWhispersPanel.jLabel1.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabelIterations, org.openide.util.NbBundle.getMessage(ChineseWhispersPanel.class, "ChineseWhispersPanel.jLabelIterations.text")); // NOI18N
 
         jSpinnerIterations.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(10), Integer.valueOf(1), null, Integer.valueOf(1)));
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel4, org.openide.util.NbBundle.getMessage(ChineseWhispersPanel.class, "ChineseWhispersPanel.jLabel4.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabelDoColoring, org.openide.util.NbBundle.getMessage(ChineseWhispersPanel.class, "ChineseWhispersPanel.jLabelDoColoring.text")); // NOI18N
 
         org.openide.awt.Mnemonics.setLocalizedText(jCheckBoxDoColoring, org.openide.util.NbBundle.getMessage(ChineseWhispersPanel.class, "ChineseWhispersPanel.jCheckBoxDoColoring.text")); // NOI18N
+        jCheckBoxDoColoring.setFocusPainted(false);
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel7, org.openide.util.NbBundle.getMessage(ChineseWhispersPanel.class, "ChineseWhispersPanel.jLabel7.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabelRandomNodeOrder, org.openide.util.NbBundle.getMessage(ChineseWhispersPanel.class, "ChineseWhispersPanel.jLabelRandomNodeOrder.text")); // NOI18N
 
         org.openide.awt.Mnemonics.setLocalizedText(jCheckBoxRandomNodeOrder, org.openide.util.NbBundle.getMessage(ChineseWhispersPanel.class, "ChineseWhispersPanel.jCheckBoxRandomNodeOrder.text")); // NOI18N
+        jCheckBoxRandomNodeOrder.setFocusPainted(false);
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel8, org.openide.util.NbBundle.getMessage(ChineseWhispersPanel.class, "ChineseWhispersPanel.jLabel8.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabelClusterSource, org.openide.util.NbBundle.getMessage(ChineseWhispersPanel.class, "ChineseWhispersPanel.jLabelClusterSource.text")); // NOI18N
 
         jComboBoxClusterSource.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Complete graph", "Visible graph" }));
         jComboBoxClusterSource.addActionListener(new java.awt.event.ActionListener() {
@@ -141,57 +154,73 @@ public class ChineseWhispersPanel extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBoxRandomNodeOrder))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel1))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(37, 37, 37)
-                                .addComponent(jCheckBoxDoColoring))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBoxClusterSource, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jSpinnerIterations, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addComponent(jLabel8))
-                .addGap(0, 0, Short.MAX_VALUE))
+        org.openide.awt.Mnemonics.setLocalizedText(jLabelClusterUnconnected, org.openide.util.NbBundle.getMessage(ChineseWhispersPanel.class, "ChineseWhispersPanel.jLabelClusterUnconnected.text")); // NOI18N
+
+        jComboBoxUnconnected.setModel(new org.jdesktop.swingx.combobox.EnumComboBoxModel(ChineseWhispersClusterer.Unconnected.class));
+        jComboBoxUnconnected.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxUnconnectedActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelGeneralLayout = new javax.swing.GroupLayout(jPanelGeneral);
+        jPanelGeneral.setLayout(jPanelGeneralLayout);
+        jPanelGeneralLayout.setHorizontalGroup(
+            jPanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelGeneralLayout.createSequentialGroup()
+                .addGroup(jPanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelGeneralLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelRandomNodeOrder)
+                            .addComponent(jLabelIterations)
+                            .addComponent(jLabelClusterUnconnected)
+                            .addComponent(jLabelDoColoring)))
+                    .addGroup(jPanelGeneralLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabelClusterSource)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelGeneralLayout.createSequentialGroup()
+                        .addGroup(jPanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCheckBoxRandomNodeOrder)
+                            .addComponent(jCheckBoxDoColoring)
+                            .addComponent(jSpinnerIterations, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanelGeneralLayout.createSequentialGroup()
+                        .addGroup(jPanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBoxClusterSource, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBoxUnconnected, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
+        jPanelGeneralLayout.setVerticalGroup(
+            jPanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelGeneralLayout.createSequentialGroup()
+                .addGroup(jPanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelClusterSource)
                     .addComponent(jComboBoxClusterSource, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelClusterUnconnected)
+                    .addComponent(jComboBoxUnconnected, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                .addGroup(jPanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelIterations)
                     .addComponent(jSpinnerIterations, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                .addGroup(jPanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelDoColoring)
                     .addComponent(jCheckBoxDoColoring))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
+                .addGroup(jPanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelRandomNodeOrder)
                     .addComponent(jCheckBoxRandomNodeOrder))
                 .addContainerGap())
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(ChineseWhispersPanel.class, "ChineseWhispersPanel.jPanel2.border.title"))); // NOI18N
+        jPanelClassPropagation.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(ChineseWhispersPanel.class, "ChineseWhispersPanel.jPanelClassPropagation.border.title"))); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, org.openide.util.NbBundle.getMessage(ChineseWhispersPanel.class, "ChineseWhispersPanel.jLabel2.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabelPropagationType, org.openide.util.NbBundle.getMessage(ChineseWhispersPanel.class, "ChineseWhispersPanel.jLabelPropagationType.text")); // NOI18N
 
         jComboBoxPropagationType.setModel(new org.jdesktop.swingx.combobox.EnumComboBoxModel(ChineseWhispersClusterer.Propagation.class));
         jComboBoxPropagationType.addActionListener(new java.awt.event.ActionListener() {
@@ -200,21 +229,22 @@ public class ChineseWhispersPanel extends javax.swing.JPanel {
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, org.openide.util.NbBundle.getMessage(ChineseWhispersPanel.class, "ChineseWhispersPanel.jLabel3.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabelPropagationVoteValue, org.openide.util.NbBundle.getMessage(ChineseWhispersPanel.class, "ChineseWhispersPanel.jLabelPropagationVoteValue.text")); // NOI18N
 
         jSpinnerPropagationVoteValue.setModel(new javax.swing.SpinnerNumberModel(Float.valueOf(0.1f), Float.valueOf(0.0f), Float.valueOf(1.0f), Float.valueOf(0.01f)));
         jSpinnerPropagationVoteValue.setEditor(new javax.swing.JSpinner.NumberEditor(jSpinnerPropagationVoteValue, "0.00"));
 
         org.openide.awt.Mnemonics.setLocalizedText(jCheckBoxStepwiseUpdates, org.openide.util.NbBundle.getMessage(ChineseWhispersPanel.class, "ChineseWhispersPanel.jCheckBoxStepwiseUpdates.text")); // NOI18N
+        jCheckBoxStepwiseUpdates.setFocusPainted(false);
         jCheckBoxStepwiseUpdates.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBoxStepwiseUpdatesActionPerformed(evt);
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel5, org.openide.util.NbBundle.getMessage(ChineseWhispersPanel.class, "ChineseWhispersPanel.jLabel5.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabelStepwiseUpdates, org.openide.util.NbBundle.getMessage(ChineseWhispersPanel.class, "ChineseWhispersPanel.jLabelStepwiseUpdates.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel6, org.openide.util.NbBundle.getMessage(ChineseWhispersPanel.class, "ChineseWhispersPanel.jLabel6.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabelMinimumEdgeWeight, org.openide.util.NbBundle.getMessage(ChineseWhispersPanel.class, "ChineseWhispersPanel.jLabelMinimumEdgeWeight.text")); // NOI18N
 
         jFormattedTextFieldMinimumEdgeWeight.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
         jFormattedTextFieldMinimumEdgeWeight.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
@@ -225,42 +255,46 @@ public class ChineseWhispersPanel extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelClassPropagationLayout = new javax.swing.GroupLayout(jPanelClassPropagation);
+        jPanelClassPropagation.setLayout(jPanelClassPropagationLayout);
+        jPanelClassPropagationLayout.setHorizontalGroup(
+            jPanelClassPropagationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelClassPropagationLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jFormattedTextFieldMinimumEdgeWeight)
-                    .addComponent(jCheckBoxStepwiseUpdates)
-                    .addComponent(jComboBoxPropagationType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSpinnerPropagationVoteValue))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanelClassPropagationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelPropagationVoteValue)
+                    .addComponent(jLabelPropagationType)
+                    .addComponent(jLabelStepwiseUpdates)
+                    .addComponent(jLabelMinimumEdgeWeight))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelClassPropagationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelClassPropagationLayout.createSequentialGroup()
+                        .addGroup(jPanelClassPropagationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCheckBoxStepwiseUpdates)
+                            .addGroup(jPanelClassPropagationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jFormattedTextFieldMinimumEdgeWeight, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jSpinnerPropagationVoteValue, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jComboBoxPropagationType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+        jPanelClassPropagationLayout.setVerticalGroup(
+            jPanelClassPropagationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelClassPropagationLayout.createSequentialGroup()
+                .addGroup(jPanelClassPropagationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelPropagationType)
                     .addComponent(jComboBoxPropagationType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                .addGroup(jPanelClassPropagationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelPropagationVoteValue)
                     .addComponent(jSpinnerPropagationVoteValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
+                .addGroup(jPanelClassPropagationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelStepwiseUpdates)
                     .addComponent(jCheckBoxStepwiseUpdates))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
+                .addGroup(jPanelClassPropagationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelMinimumEdgeWeight)
                     .addComponent(jFormattedTextFieldMinimumEdgeWeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
@@ -268,19 +302,21 @@ public class ChineseWhispersPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(header, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(header, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanelClassPropagation, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(2, 2, 2))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(header, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jPanelGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelClassPropagation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -295,12 +331,16 @@ public class ChineseWhispersPanel extends javax.swing.JPanel {
     private void jComboBoxPropagationTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPropagationTypeActionPerformed
         boolean enable = getPropagation() == ChineseWhispersClusterer.Propagation.VOTE;
         jSpinnerPropagationVoteValue.setEnabled(enable);
-        jLabel3.setEnabled(enable);
+        jLabelPropagationVoteValue.setEnabled(enable);
     }//GEN-LAST:event_jComboBoxPropagationTypeActionPerformed
 
     private void jComboBoxClusterSourceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxClusterSourceActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxClusterSourceActionPerformed
+
+    private void jComboBoxUnconnectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxUnconnectedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxUnconnectedActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.jdesktop.swingx.JXHeader header;
@@ -309,17 +349,19 @@ public class ChineseWhispersPanel extends javax.swing.JPanel {
     private javax.swing.JCheckBox jCheckBoxStepwiseUpdates;
     private javax.swing.JComboBox jComboBoxClusterSource;
     private javax.swing.JComboBox jComboBoxPropagationType;
+    private javax.swing.JComboBox jComboBoxUnconnected;
     private javax.swing.JFormattedTextField jFormattedTextFieldMinimumEdgeWeight;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel jLabelClusterSource;
+    private javax.swing.JLabel jLabelClusterUnconnected;
+    private javax.swing.JLabel jLabelDoColoring;
+    private javax.swing.JLabel jLabelIterations;
+    private javax.swing.JLabel jLabelMinimumEdgeWeight;
+    private javax.swing.JLabel jLabelPropagationType;
+    private javax.swing.JLabel jLabelPropagationVoteValue;
+    private javax.swing.JLabel jLabelRandomNodeOrder;
+    private javax.swing.JLabel jLabelStepwiseUpdates;
+    private javax.swing.JPanel jPanelClassPropagation;
+    private javax.swing.JPanel jPanelGeneral;
     private javax.swing.JSpinner jSpinnerIterations;
     private javax.swing.JSpinner jSpinnerPropagationVoteValue;
     // End of variables declaration//GEN-END:variables
