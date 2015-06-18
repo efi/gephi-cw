@@ -176,7 +176,6 @@ public class ChineseWhispersClusterer implements Clusterer, LongTask {
             int classValue = entry.getValue();
             if (! classCluster.containsKey(classValue)) {
                 ChineseWhispersClusterImpl cluster = new ChineseWhispersClusterImpl();
-                cluster.setName("Cluster for Class #"+classValue);
                 classCluster.put(classValue, cluster);
             }
             classCluster.get(classValue).addNode(entry.getKey());     
@@ -189,6 +188,11 @@ public class ChineseWhispersClusterer implements Clusterer, LongTask {
         progress.progress();
         
         result.addAll(classCluster.values());
+        
+        int i=0;
+        for (Cluster cluster : result) {
+            ((ChineseWhispersClusterImpl)cluster).setName("Cluster for Class #"+ i++);
+        }
         
         graph.readUnlockAll();
         
