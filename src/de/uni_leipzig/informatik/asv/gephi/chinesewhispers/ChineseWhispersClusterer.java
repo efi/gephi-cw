@@ -91,6 +91,7 @@ public class ChineseWhispersClusterer implements Clusterer, LongTask {
         for (Node node : graph.getNodes()) {
           if (unconnected == Unconnected.INDIVIDUAL) classes.put(node, counter++);
           if (graph.getNeighbors(node).iterator().hasNext()) {
+              graph.readUnlock();
               connectedNodes.add(node);
               if (unconnected != Unconnected.INDIVIDUAL) classes.put(node, counter++);
           }
